@@ -13,13 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payments', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedbiginteger('order_id')->nullable();
-            $table->decimal('amount', 13, 2);
+            $table->decimal('price', 13, 2)->nullable();
+            $table->integer('quantity')->default(1);
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete();
+            $table->unique(['product_id', 'order_id']);
             $table->timestamps();
-
-            $table->foreign('order_id')->references('id')->on('orders');
         });
     }
 
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payments');
+        Schema::dropIfExists('order_products');
     }
 };

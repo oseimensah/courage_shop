@@ -15,7 +15,13 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->unsignedbiginteger('user_id')->nullable();
+            $table->uuid('uuid')->nullable();
+            $table->string('code')->nullable();
+            $table->decimal('amount', 13, 2)->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

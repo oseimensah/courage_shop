@@ -14,22 +14,18 @@
 		@vite(['resources/css/app.css', 'resources/js/app.js'])
 	</head>
 	<body class="font-sans antialiased">
-		<div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-			@include('layouts.navigation')
+		<div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
+			@include('partials.admin.sidebar')
+			<div class="w-full mx-auto p-3">
+                <div class="h-full min-h-fit bg-gray-200 shadow-lg rounded-md">
+                    @include('partials.admin.header')
 
-			<!-- Page Heading -->
-			@if (isset($header))
-			<header class="bg-white dark:bg-gray-800 shadow">
-				<div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-					{{ $header }}
-				</div>
-			</header>
-			@endif
-
-			<!-- Page Content -->
-			<main>
-				{{ $slot }}
-			</main>
+                    <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
+                        {{ $slot }}
+                    </div>
+                </div>
+            </div>
 		</div>
+        @include('partials.admin.scripts')
 	</body>
 </html>

@@ -1,219 +1,178 @@
 <x-shop-layout>
     @section('title', 'Home - Purely Ghanaian')
+    <div class="w-full h-fit">
+        <div class="relative bg-gray-900">
+            <!-- Decorative image and overlay -->
+            <div aria-hidden="true" class="absolute inset-0 overflow-hidden">
+                <img src="{{ asset('images/banner/banner.jpeg') }}" alt="" class="w-full h-full object-center object-cover" />
+            </div>
+            <div aria-hidden="true" class="absolute inset-0 bg-gray-900 opacity-50"></div>
 
-    @include('partials.user.header')
-    @include('partials.user.navbar')
+            <header class="relative z-10">
+                <nav aria-label="Top">
+                    <div class="bg-gray-900">
+                        <div class="max-w-7xl mx-auto h-10 px-4 flex items-center justify-between sm:px-6 lg:px-8">
+                            <div class="flex items-center text-white uppercase underline font-bold font-poppins">
+                                <a href="{{ route('home') }}">{{ config('app.name') }}</a>
+                            </div>
+                            <div class="flex items-center space-x-6">
+                                @if(!auth()->user())
+                                <a href="{{ route('login') }}" class="text-sm font-medium text-white hover:text-gray-100">Sign in</a>
+                                <a href="{{ route('register') }}" class="text-sm font-medium text-white hover:text-gray-100">Create an account</a>
+                                @endif
 
-     <!-- banner -->
-    <div class="bg-cover bg-no-repeat bg-center py-36" style="background-image: url('{{ asset('images/banner/banner-bg.jpg') }}');">
-        <div class="container">
-            <h1 class="text-6xl text-gray-800 font-medium mb-4 capitalize">
-                best collection for <br> home decoration
-            </h1>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aperiam <br>
-                accusantium perspiciatis, sapiente
-                magni eos dolorum ex quos dolores odio</p>
-            <div class="mt-12">
-                <a href="#" class="bg-primary border border-primary text-white px-8 py-3 font-medium
-                    rounded-md hover:bg-transparent hover:text-primary">Shop Now</a>
-            </div>
-        </div>
-    </div>
-    <!-- ./banner -->
+                                @auth
+                                <div class="text-center z-20 font-medium text-white hover:text-gray-100 transition relative group cursor-pointer">
+                                    <div class="text-sm">{{ auth()->user()->profile->last_name }}</div>
+                                    <div class="absolute w-full min-w-fit left-0 text-xs top-full bg-white shadow-lg py-3 divide-y divide-gray-300 divide-dashed opacity-0 group-hover:opacity-100 transition duration-300 invisible group-hover:visible">
+                                        @if(auth()->user()->hasRole('admin'))
+                                        <x-dropdown-link class="text-gray-800 hover:text-white hover:bg-primary hover:shadow-lg" :href="route('admin.dashboard')">
+                                            {{ __('Dashboard') }}
+                                        </x-dropdown-link>
+                                        @endif
+                                        <x-dropdown-link class="text-gray-800 hover:text-white hover:bg-primary hover:shadow-lg" href="">
+                                            {{ __('Orders') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link class="text-gray-800 hover:text-white hover:bg-primary hover:shadow-lg" href="">
+                                            {{ __('Profile') }}
+                                        </x-dropdown-link>
 
-    <!-- features -->
-    <div class="container py-16">
-        <div class="w-10/12 grid grid-cols-3 gap-6 mx-auto justify-center">
-            <div class="border border-primary dark:bg-gray-300 rounded-md px-3 py-6 flex justify-center items-center gap-5">
-                <img src="{{ asset('images/icons/delivery-van.svg') }}" alt="Delivery" class="w-12 h-12 object-contain">
-                <div>
-                    <h4 class="font-medium capitalize text-lg">Free Shipping</h4>
-                    <p class="text-gray-500 text-sm">Order over $200</p>
-                </div>
-            </div>
-            <div class="border border-primary dark:bg-gray-300 rounded-sm px-3 py-6 flex justify-center items-center gap-5">
-                <img src="{{ asset('images/icons/money-back.svg') }}" alt="Delivery" class="w-12 h-12 object-contain">
-                <div>
-                    <h4 class="font-medium capitalize text-lg">Money Rturns</h4>
-                    <p class="text-gray-500 text-sm">30 days money returs</p>
-                </div>
-            </div>
-            <div class="border border-primary dark:bg-gray-300 rounded-sm px-3 py-6 flex justify-center items-center gap-5">
-                <img src="{{ asset('images/icons/service-hours.svg') }}" alt="Delivery" class="w-12 h-12 object-contain">
-                <div>
-                    <h4 class="font-medium capitalize text-lg">24/7 Support</h4>
-                    <p class="text-gray-500 text-sm">Customer support</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ./features -->
-
-    <!-- categories -->
-    <div class="container py-16">
-        <h2 class="text-2xl font-medium text-gray-800 dark:text-gray-100 uppercase mb-6">shop by category</h2>
-        <div class="grid grid-cols-3 gap-3">
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="{{ asset('images/category/category-1.jpg') }}" alt="category 1" class="w-full">
-                <a href="#"
-                    class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Bedroom</a>
-            </div>
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="{{ asset('images/category/category-2.jpg') }}" alt="category 1" class="w-full">
-                <a href="#"
-                    class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Mattrass</a>
-            </div>
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="{{ asset('images/category/category-3.jpg') }}" alt="category 1" class="w-full">
-                <a href="#"
-                    class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Outdoor
-                </a>
-            </div>
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="{{ asset('images/category/category-4.jpg') }}" alt="category 1" class="w-full">
-                <a href="#"
-                    class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Sofa</a>
-            </div>
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="{{ asset('images/category/category-5.jpg') }}" alt="category 1" class="w-full">
-                <a href="#"
-                    class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Living
-                    Room</a>
-            </div>
-            <div class="relative rounded-sm overflow-hidden group">
-                <img src="{{ asset('images/category/category-6.jpg') }}" alt="category 1" class="w-full">
-                <a href="#"
-                    class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center text-xl text-white font-roboto font-medium group-hover:bg-opacity-60 transition">Kitchen</a>
-            </div>
-        </div>
-    </div>
-    <!-- ./categories -->
-
-    <!-- new arrival -->
-    <div class="container pb-16">
-        <h2 class="text-2xl font-medium text-gray-800 dark:text-gray-100 uppercase mb-6">top new arrival</h2>
-        <div class="grid grid-cols-4 gap-6">
-            @for ($i = 0; $i < 8; $i++)
-            <div class="bg-white shadow rounded overflow-hidden group">
-                <div class="relative">
-                    <img src="{{ asset('images/products/product1.jpg') }}" alt="product 1" class="w-full">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center
-                    justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                        {{-- <a href="#"
-                            class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                            title="view product">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </a>
-                        <a href="#"
-                            class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                            title="add to wishlist">
-                            <i class="fa-solid fa-heart"></i>
-                        </a> --}}
-                    </div>
-                </div>
-                <div class="pt-4 pb-3 px-4">
-                    <a href="#">
-                        <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">Guyer
-                            Chair</h4>
-                    </a>
-                    <div class="flex items-baseline mb-1 space-x-2">
-                        <p class="text-xl text-primary font-semibold">$45.00</p>
-                        <p class="text-sm text-gray-400 line-through">$55.90</p>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="flex gap-1 text-sm text-yellow-400">
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+                                            <x-dropdown-link class="text-gray-800 hover:text-white hover:bg-primary hover:shadow-lg" :href="route('logout')"
+                                                    onclick="event.preventDefault();
+                                                                this.closest('form').submit();">
+                                                {{ __('Log Out') }}
+                                            </x-dropdown-link>
+                                        </form>
+                                    </div>
+                                </div>
+                                @endauth
+                            </div>
                         </div>
-                        <div class="text-xs text-gray-500 ml-3">(150)</div>
                     </div>
-                </div>
-                <a href="#" class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add to cart</a>
-            </div>
-            @endfor
-        </div>
-    </div>
-    <!-- ./new arrival -->
 
-    <!-- ads -->
-    <div class="container pb-16">
-        <a href="#">
-            <img src="{{ asset('images/banner/offer.jpg') }}" alt="ads" class="w-full">
-        </a>
-    </div>
-    <!-- ./ads -->
+                    <!-- Secondary navigation -->
+                    <div class="backdrop-blur-md backdrop-filter bg-opacity-10 bg-white">
+                        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div>
+                                <div class="h-16 flex items-center justify-between">
+                                    <div class="hidden lg:flex-1 lg:flex lg:items-center">
+                                        <a href="{{ route('home') }}">
+                                            <span class="sr-only">{{ config('app.name') }}</span>
+                                            <img class="h-8 rounded w-auto" src="{{ asset('images/logo/logo.jpg') }}" alt="" />
+                                        </a>
+                                    </div>
 
-    <!-- product -->
-    <div class="container pb-16">
-        <h2 class="text-2xl font-medium text-gray-800 dark:text-gray-100 uppercase mb-6">recomended for you</h2>
-        <div class="grid grid-cols-4 gap-6">
-            @for ($i = 0; $i < 8; $i++)
-            <div class="bg-white shadow rounded overflow-hidden group">
-                <div class="relative">
-                    <img src="{{ asset('images/products/product12.jpg') }}" alt="product 1" class="w-full">
-                    <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition">
-                        {{-- <a href="#"
-                            class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                            title="view product">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </a>
-                        <a href="#"
-                            class="text-white text-lg w-9 h-8 rounded-full bg-primary flex items-center justify-center hover:bg-gray-800 transition"
-                            title="add to wishlist">
-                            <i class="fa-solid fa-heart"></i>
-                        </a> --}}
-                    </div>
-                </div>
-                <div class="pt-4 pb-3 px-4">
-                    <a href="#">
-                        <h4 class="uppercase font-medium text-xl mb-2 text-gray-800 hover:text-primary transition">Guyer
-                            Chair</h4>
-                    </a>
-                    <div class="flex items-baseline mb-1 space-x-2">
-                        <p class="text-xl text-primary font-semibold">$45.00</p>
-                        <p class="text-sm text-gray-400 line-through">$55.90</p>
-                    </div>
-                    <div class="flex items-center">
-                        <div class="flex gap-1 text-sm text-yellow-400">
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
-                            <span><i class="fa-solid fa-star"></i></span>
+                                    <div class="hidden h-full lg:flex">
+                                        <div class="px-4 bottom-0 inset-x-0">
+                                            <div class="h-full flex justify-center space-x-8">
+                                                @foreach ($categories as $cat)
+                                                <a href="" class="flex items-center text-sm font-medium text-white">{{ $cat->name }}</a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                <div class="flex-1 flex items-center justify-end">
+                                    <div class="flex items-center lg:ml-8">
+                                        <div class="ml-4 flow-root lg:ml-8">
+                                            <a href="#" class="group -m-2 p-2 flex items-center">
+                                                <span class="flex-shrink-0 h-6 w-6 text-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                                    </svg>
+                                                </span>
+                                                <span class="ml-2 text-sm font-medium text-white">0</span>
+                                                <span class="sr-only">items in cart, view bag</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="text-xs text-gray-500 ml-3">(150)</div>
+                    </div>
+                </nav>
+            </header>
+
+            <div class="relative max-w-4xl mx-auto py-16 px-6 flex flex-col items-center text-center sm:py-32 lg:px-0">
+                <h1 class="text-4xl bg-white rounded bg-opacity-40 shadow-xl p-10 font-extrabold tracking-tight text-white lg:text-6xl">Your No. 1 Ghanaian Products Shop.</h1>
+                <p class="mt-12 text-xl text-white max-w-lg">Get the latest stock of all your Ghanaian products here. No need to hustle, just visit, add to cart and buy. Purely Ghanaian - Your easy shopping center.</p>
+            </div>
+        </div>
+
+        <div class="bg-white p-0">
+            <div class="py-12 font-poppins max-w-7xl mx-auto">
+                <h2 class="font-bold py-8">Featured Products</h2>
+                <div class="-mx-px border-l border-gray-200 grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
+                    @forelse ( $featuredProducts as $product )
+                    <div class="group p-4 border-r border-b border-gray-200 sm:p-6 hover:shadow-xl transition-all duration-300 ease-in-out">
+                        <div class="rounded-lg overflow-hidden bg-gray-200 aspect-w-1 aspect-h-1">
+                            <img src="{{ $product->thumb_image_url }}" alt="product image" class="w-full h-full object-center object-cover" />
+                        </div>
+                        <div class="w-full h-full overflow-hidden space-y-3 mt-3">
+                            <h3 class="text-sm font-medium text-gray-900">
+                               <a href="">{{ $product->name }}</a>
+                            </h3>
+                            <div class="flex justify-between">
+                                <p class="mt-4 text-base font-medium text-gray-900">{{ $product->price_with_currency }}</p>
+                                <x-primary-button class="bg-primary hover:bg-orange-800 transition-all duration-300 ease-in-out text-xs">add to cart</x-primary-button>
+                            </div>
+                        </div>
+                    </div>
+
+                    @empty
+                        <div class="bg-white p-3 rounded-md shadow-lg w-full flex justify-between col-span-2 sm:mx-0 md:col-span-3 lg:col-span-4">
+                            <div class="py-16 flex justify-center items-center w-full">
+                                <h2>
+                                    No product available. Products will be loaded soon
+                                </h2>
+                            </div>
+                        </div>
+                    @endforelse
+                </div>
+            </div>
+
+            <section aria-labelledby="comfort-heading" class="max-w-7xl mx-auto mb-8">
+                <div class="relative rounded-lg overflow-hidden">
+                    <div class="absolute inset-0">
+                        <img src="https://tailwindui.com/img/ecommerce-images/home-page-01-feature-section-02.jpg" alt="" class="w-full h-full object-center object-cover" />
+                    </div>
+                    <div class="relative bg-gray-900 bg-opacity-75 py-20 px-6 sm:py-28 sm:px-12 lg:px-16">
+                        <div class="relative max-w-3xl mx-auto flex flex-col items-center text-center">
+                            <h2 id="comfort-heading" class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">Our Best Products</h2>
+                            <p class="mt-3 text-xl text-white">Known for our rich culture, Purely Ghanaian is able to supply you with the best of all cultural items in Ghana.</p>
+                        </div>
                     </div>
                 </div>
-                <a href="#"
-                    class="block w-full py-1 text-center text-white bg-primary border border-primary rounded-b hover:bg-transparent hover:text-primary transition">Add
-                    to cart</a>
+            </section>
+
+            <div class="py-8 font-poppins max-w-7xl mx-auto">
+                {{-- <h2 class="font-bold py-8">Featured Products</h2> --}}
+                <div class="-mx-px border-l border-gray-200 grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
+                    @foreach ($products as $product)
+                    <div class="group p-4 border-r border-b border-gray-200 sm:p-6 hover:shadow-xl transition-all duration-300 ease-in-out">
+                        <div class="rounded-lg overflow-hidden bg-gray-200 aspect-w-1 aspect-h-1">
+                            <img src="{{ $product->thumb_image_url }}" alt="product image" class="w-full h-full object-center object-cover" />
+                        </div>
+                        <div class="w-full h-full overflow-hidden space-y-3 mt-3">
+                            <h3 class="text-sm font-medium text-gray-900">
+                               <a href="">{{ $product->name }}</a>
+                            </h3>
+                            <div class="flex justify-between">
+                                <p class="mt-4 text-base font-medium text-gray-900">{{ $product->getPriceWithCurrencyAttribute() }}</p>
+                                <x-primary-button class="bg-primary hover:bg-orange-800 transition-all duration-300 ease-in-out text-xs">add to cart</x-primary-button>
+                            </div>
+
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
             </div>
-            @endfor
 
         </div>
+
+        @include('partials.user.footer')
     </div>
-    <!-- ./product -->
-
-    <!-- copyright -->
-    <div class="bg-gray-800 py-4">
-        <div class="container flex items-center justify-between">
-            <div>
-                <p class="text-white flex">
-                    <img src="{{ asset('images/logo/logo.jpg') }}" alt="logo" class="h-5 rounded">
-                    <span class="pl-3">&copy; Purely Ghanaian - All Right Reserved
-                    </span>
-                </p>
-                <p class="text-[8px] dark:text-white text-gray-300">Template by TailCommerce</p>
-            </div>
-            <div>
-                <img src="{{ asset('images/methods.png') }}" alt="methods" class="h-5">
-            </div>
-        </div>
-    </div>
-    <!-- ./copyright -->
-
-
 </x-shop-layout>

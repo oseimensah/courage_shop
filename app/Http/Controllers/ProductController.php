@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::latest()->get();
+        return view('admin.product.home', compact('products'));
     }
 
     /**
@@ -24,7 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::latest()->get();
+        return view('admin.product.create', compact('categories'));
     }
 
     /**
@@ -35,7 +38,28 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category' => ['required', 'exists:categories,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'price' => ['required'],
+            'description' => ['required'],
+            'image' => ['required', 'image',],
+        ]);
+
+        $product = Product::create([
+            'category_id' => $request->category,
+            'name' => $request->name,
+            'price' => $request->price,
+            'discount' => '0',
+            'description' => $request->description,
+            'featured' => $request->featured ? 1 : 0,
+        ]);
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $product->addMediaFromRequest('image')->toMediaCollection('product_image');
+        }
+
+        return redirect()->route('admin.products');
     }
 
     /**
