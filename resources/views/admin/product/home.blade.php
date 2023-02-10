@@ -19,11 +19,23 @@
             <div class="flex space-x-3 items-center">
                 <h4>{{ $product->price_with_currency }}</h4>
                 <div class="flex space-x-3">
-                    <span class="rounded bg-blue-100 hover:bg-blue-600 text-gray-800 hover:text-white py-1 px-2">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                    </span>
-                    <span class="rounded bg-red-100 hover:bg-red-600 text-gray-800 hover:text-white py-1 px-2">
-                        <i class="fa-solid fa-trash-can"></i>
+                    <a href="{{ route('admin.product.show', $product->id) }}" class="rounded bg-blue-100 hover:bg-blue-600 text-gray-800 hover:text-white py-1 px-2">
+                        <span>
+                            <i class="fa-solid fa-eye"></i>
+                        </span>
+                    </a>
+                    <a href="{{ route('admin.product.edit', $product->id) }}" class="rounded bg-blue-100 hover:bg-blue-600 text-gray-800 hover:text-white py-1 px-2">
+                        <span>
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </span>
+                    </a>
+                    <span class="rounded bg-red-100 hover:bg-red-600 text-gray-800 hover:text-white py-1 px-2 cursor-pointer">
+                        <form action="{{ route('admin.product.delete',$product->id) }}" method="POST">
+                            @csrf
+                            <button type="submit">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </form>
                     </span>
                 </div>
             </div>

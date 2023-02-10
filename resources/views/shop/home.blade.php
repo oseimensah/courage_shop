@@ -74,21 +74,32 @@
                                         </div>
                                     </div>
 
-                                <div class="flex-1 flex items-center justify-end">
-                                    <div class="flex items-center lg:ml-8">
-                                        <div class="ml-4 flow-root lg:ml-8">
-                                            <a href="#" class="group -m-2 p-2 flex items-center">
-                                                <span class="flex-shrink-0 h-6 w-6 text-white">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                                                    </svg>
-                                                </span>
-                                                <span class="ml-2 text-sm font-medium text-white">0</span>
-                                                <span class="sr-only">items in cart, view bag</span>
-                                            </a>
+                                    <div class="flex-1 flex items-center justify-end">
+                                        <div class="flex items-center lg:ml-8">
+                                            <div class="ml-4 flow-root lg:ml-8">
+                                                @if(session('cart'))
+                                                <a href="{{ route('carts') }}" class="group -m-2 p-2 flex items-center">
+                                                    <span class="flex-shrink-0 h-6 w-6 text-white">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                                        </svg>
+                                                    </span>
+                                                    <span class="ml-2 text-sm font-medium text-white bg-white w-6 h-6 shadow-lg flex justify-center items-center bg-opacity-40 rounded-full p-1">{{ count(session('cart')) }}</span>
+                                                    <span class="sr-only">items in cart, view bag</span>
+                                                </a>
+                                                @else
+                                                <div class="group -m-2 p-2 flex items-center">
+                                                    <span class="flex-shrink-0 h-6 w-6 text-white">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                                                        </svg>
+                                                    </span>
+                                                    <span class="ml-2 text-sm font-medium text-white">0</span>
+                                                </div>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +128,9 @@
                             </h3>
                             <div class="flex justify-between">
                                 <p class="mt-4 text-base font-medium text-gray-900">{{ $product->price_with_currency }}</p>
-                                <x-primary-button class="bg-primary hover:bg-orange-800 transition-all duration-300 ease-in-out text-xs">add to cart</x-primary-button>
+                                <a href="{{ route('cart.add', $product->id) }}" class="bg-gray-800 dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
+                                    add to cart
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -162,7 +175,9 @@
                             </h3>
                             <div class="flex justify-between">
                                 <p class="mt-4 text-base font-medium text-gray-900">{{ $product->getPriceWithCurrencyAttribute() }}</p>
-                                <x-primary-button class="bg-primary hover:bg-orange-800 transition-all duration-300 ease-in-out text-xs">add to cart</x-primary-button>
+                                <a href="{{ route('cart.add', $product->id) }}" class="bg-gray-800 dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
+                                    add to cart
+                                </a>
                             </div>
 
                         </div>

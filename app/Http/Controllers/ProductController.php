@@ -65,45 +65,67 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return view('admin.product.view', compact('product'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $categories = Category::latest()->get();
+        return view('admin.product.edit', compact('product', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'category' => ['required', 'exists:categories,id'],
+            'name' => ['required', 'string', 'max:255'],
+            'price' => ['required'],
+            'description' => ['required'],
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->category_id = $request->category;
+        $product->name = $request->name;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->featured = $request->featured ? 1 : 0;
+
+        $product->save();
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $product->addMediaFromRequest('image')->toMediaCollection('product_image');
+        }
+        return redirect()->route('admin.products');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return redirect()->route('admin.products');
     }
 }

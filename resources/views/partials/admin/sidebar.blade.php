@@ -1,8 +1,10 @@
 <div class="w-full md:max-w-sm max-w-xs p-3">
-    <div class="h-full min-h-fit bg-gray-200 shadow-lg rounded-md">
-        <div class="flex p-3 items-center bg-white rounded-t-md underline border-b border-gray-300 shadow">
-            <x-application-logo class="w-20 h-20" />
-            <span class="text-gray-800 text-sm md:text-2xl font-bold">{{ config('app.name') }}</span>
+    <div class="h-full min-h-fit bg-gray-200 shadow-lg rounded-md border border-gray-300">
+        <div class="p-3 bg-white rounded-t-md border-b border-gray-300 shadow">
+            <a href="{{ route('home') }}" class="flex items-center underline">
+                <x-application-logo class="w-20 h-20" />
+                <span class="text-gray-800 text-sm md:text-2xl font-bold">{{ config('app.name') }}</span>
+            </a>
         </div>
 
         <div class="py-3 divide-y divide-gray-300 divide-dashed space-y-3">

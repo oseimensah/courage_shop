@@ -9,13 +9,14 @@
         <link rel="shortcut icon" href="{{ asset('images/favicon/favicon.ico') }}" type="image/x-icon">
 
 		<!-- Fonts -->
-		{{-- <link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap"> --}}
+		<link rel="stylesheet" href="https://fonts.bunny.net/css2?family=Nunito:wght@400;600;700&display=swap">
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
 		<!-- Scripts -->
 		@vite(['resources/css/app.css', 'resources/js/app.js'])
+        @include('partials.user.styles')
 	</head>
-	<body class="font-sans antialiased">
+	<body class="font-poppins antialiased">
 		<div class="min-h-screen bg-gray-100 dark:bg-gray-900">
 			<!-- Page Heading -->
 			@if (isset($header))
@@ -31,5 +32,6 @@
 				{{ $slot }}
 			</main>
 		</div>
+        @include('partials.user.scripts')
 	</body>
 </html>

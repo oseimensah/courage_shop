@@ -55,8 +55,9 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Category $category)
+    public function show(Request $request)
     {
+        $category = Category::findOrFail($request->id);
         return view('admin.category.view', compact('category'));
     }
 
@@ -66,8 +67,9 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Category $category)
+    public function edit(Request $request)
     {
+        $category = Category::findOrFail($request->id);
         return view('admin.category.edit', compact('category'));
     }
 
@@ -78,9 +80,21 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id)
     {
-        //
+
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
+
+        $cat = Category::findOrFail($id);
+        $cat->name = $request->name;
+        $cat->save();
+
+        if ($request->hasFile('image') && $request->file('image')->isValid()) {
+            $cat->addMediaFromRequest('image')->toMediaCollection('category_image');
+        }
+        return redirect()->route('admin.categories');
     }
 
     /**
@@ -89,8 +103,11 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function delete($id)
     {
-        //
+        $cat = Category::findOrFail($id);
+        $cat->delete();
+
+        return redirect()->route('admin.categories');
     }
 }
