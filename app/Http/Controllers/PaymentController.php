@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\Payment;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
@@ -35,7 +37,23 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $trans = $request->transaction_id;
+        if (isset($request->transaction_id)) {
+            $order = Order::firstWhere('id', $request->order_id);
+            $order->status = 'paid';
+            $order->save();
+
+            $payment = Payment::create([
+                'order_id' => $order->id,
+                'amount' => $request->amount,
+            ]);
+            $transaction = Transaction::create([
+                'payment_id' => $payment->id,
+                'code' => $request->transaction_id
+            ]);
+
+            return redirect()->route('home')->with('payment-success', 'Payment received successfully');
+        }
     }
 
     /**

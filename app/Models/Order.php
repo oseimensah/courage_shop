@@ -13,7 +13,9 @@ class Order extends Model
         'user_id',
         'uuid',
         'code',
+        'link',
         'amount',
+        'status', 'order_date', 'deleted_at', 'created_at', 'updated_at'
     ];
 
     public function user()
@@ -33,11 +35,16 @@ class Order extends Model
 
     public function product()
     {
-        return $this->belongsToMany(Product::class, 'order_product')->withPivot('price', 'quantity');
+        return $this->belongsToMany(Product::class, 'order_products')->withPivot('price', 'quantity');
     }
 
     public function getAmountWithCurrencyAttribute()
     {
         return "GHS " . $this->amount;
+    }
+
+    public function payments()
+    {
+        return $this->hasMany(Payment::class);
     }
 }

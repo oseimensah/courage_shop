@@ -14,7 +14,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::with('payments')->latest()->get();
+        return view('admin.order.home', compact('orders'));
     }
 
     /**

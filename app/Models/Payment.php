@@ -13,4 +13,14 @@ class Payment extends Model
         'order_id',
         'amount',
     ];
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
+
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
 }

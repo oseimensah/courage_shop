@@ -9,5 +9,12 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'payment_id', 'code',
+    ];
+
+    public function payment()
+    {
+        return $this->belongsTo(Payment::class);
+    }
 }

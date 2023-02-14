@@ -32,14 +32,14 @@
                     </span>
                 </a>
             </span>
-            {{-- <span>
+            <span>
                 <a href="{{ route('admin.orders') }}" class="{{ request()->routeIs('admin.orders') ? 'bg-indigo-800 shadow-inner text-white' : 'hover:bg-indigo-300' }} flex items-center px-6 py-3 transition">
                     <i class="fa-solid fa-cart-flatbed {{ request()->routeIs('admin.orders') ? 'text-indigo-300' : 'text-gray-900' }}""></i>
                     <span class="pl-3">
                         Orders
                     </span>
                 </a>
-            </span> --}}
+            </span>
         </div>
     </div>
 </div>

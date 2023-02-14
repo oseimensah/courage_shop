@@ -14,6 +14,7 @@
 
 		<!-- Scripts -->
 		@vite(['resources/css/app.css', 'resources/js/app.js'])
+        @livewireStyles
         @include('partials.user.styles')
 	</head>
 	<body class="font-poppins antialiased">
@@ -32,6 +33,7 @@
 				{{ $slot }}
 			</main>
 		</div>
+        @livewireScripts
         @include('partials.user.scripts')
 	</body>
 </html>

@@ -17,7 +17,7 @@
 
         <div class="relative py-10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold text-white">Profile</h1>
+                <h1 class="text-3xl font-bold text-white">Orders</h1>
             </div>
         </div>
     </div>
@@ -28,7 +28,6 @@
                 <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
                     <aside class="py-6 lg:col-span-3">
                         <nav class="space-y-1">
-                            {{-- <a :class=" 'bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700' : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900', 'group border-l-4 px-3 py-2 flex items-center text-sm font-medium']" :aria-current="item.current ? 'page' : undefined"> --}}
                             <a href="{{ route('profile.edit') }}" class="border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900', 'group border-l-4 px-3 py-2 flex items-center text-sm font-medium" >
                                 <span class="truncate">
                                     Profile
@@ -41,31 +40,24 @@
                             </a>
                         </nav>
                     </aside>
-
                     <div class="py-6 lg:col-span-9">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-                            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                                <div class="max-w-xl">
-                                    @include('profile.partials.update-profile-information-form')
+                            @foreach ($orders as $order)
+                            <div class="bg-gray-100 hover:bg-white transition-all duration-30 my-2 ease-linear p-3 hover:rounded-md hover:shadow-lg w-full flex justify-between">
+                                <h2 class="text-stone-800">{{ $order->code }}</h2>
+                                <div class="space-x-3">
+                                    <span>{{ $order->amount_with_currency }}</span>
+                                    @if ($order->status != 'paid')
+                                    <a class="rounded bg-blue-100 hover:bg-blue-600 text-gray-800 hover:text-white py-1 px-2" href="{{ route('checkout.pay', ['code'=>$order->code]) }}">Pay</a>
+                                    @else
+                                    <span class="rounded capitalize bg-orange-600 text-gray-100 py-1 px-2">{{ $order->status ? $order->status : 'pending' }}</span>
+                                    @endif
                                 </div>
                             </div>
-
-                            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                                <div class="max-w-xl">
-                                    @include('profile.partials.update-password-form')
-                                </div>
-                            </div>
-
-                            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                                <div class="max-w-xl">
-                                    @include('profile.partials.delete-user-form')
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </section>

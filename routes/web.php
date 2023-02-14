@@ -7,6 +7,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Models\Category;
 use App\Models\Product;
 
@@ -26,6 +28,13 @@ Route::get('/', function () {
     $products = Product::where('featured', '0')->latest()->get();
     $categories = Category::latest()->get();
     return view('shop.home', compact('featuredProducts', 'products', 'categories'));
+})->name('index');
+
+Route::get('/home', function () {
+    $featuredProducts = Product::where('featured', '1')->latest()->get();
+    $products = Product::where('featured', '0')->latest()->get();
+    $categories = Category::latest()->get();
+    return view('shop.home', compact('featuredProducts', 'products', 'categories'));
 })->name('home');
 
 
@@ -33,6 +42,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/orders', [ProfileController::class, 'orders'])->name('profile.orders');
 });
 
 Route::prefix('admin')->middleware('auth', 'role:admin')->group(function ($route) {
@@ -60,7 +70,7 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->group(function ($route
 
 
     Route::prefix('order')->group(function ($route) {
-        $route->get('/orders', [ProductController::class, 'index'])->name('admin.orders');
+        $route->get('/orders', [OrderController::class, 'index'])->name('admin.orders');
         $route->get('/order/{id}', [ProductController::class, 'index'])->name('admin.order');
     });
 });
@@ -74,9 +84,11 @@ Route::prefix('shop')->group(
             $route->delete('/remove/from/cart', [CartController::class, 'remove'])->name('cart.remove');
         });
 
-        $route->get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 
         Route::middleware('auth')->group(function ($route) {
+            $route->get('checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+            $route->get('checkout/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');
+            $route->get('payment/complete', [PaymentController::class, 'store'])->name('payment.store');
         });
     }
 );

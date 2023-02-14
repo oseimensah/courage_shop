@@ -61,7 +61,7 @@
                         <div class="w-full mt-8">
                             <a href="{{ route('checkout') }}">
                                 <p class="w-full rounded-md text-white bg-blue-800 hover:bg-blue-700 py-1.5 items-center flex justify-center hover:shadow-lg font-semibold text-sm transition-all duration-200 ease-linear">
-                                    Check Out
+                                    Order Now
                                 </p>
                             </a>
                         </div>

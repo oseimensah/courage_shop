@@ -15,7 +15,11 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->unsignedbiginteger('payment_id')->nullable();
+            $table->string('code')->nullable();
             $table->timestamps();
+
+            $table->foreign('payment_id')->references('id')->on('payments')->cascadeOnDelete();
         });
     }
 

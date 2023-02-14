@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class)->latest('updated_at');
+    }
 }
