@@ -9,6 +9,8 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\UserController;
 use App\Models\Category;
 use App\Models\Product;
 
@@ -42,6 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::patch('/rate', [SettingController::class, 'rateUpdate'])->name('rate.update');
     Route::get('/orders', [ProfileController::class, 'orders'])->name('profile.orders');
 });
 
@@ -72,6 +76,12 @@ Route::prefix('admin')->middleware('auth', 'role:admin')->group(function ($route
     Route::prefix('order')->group(function ($route) {
         $route->get('/orders', [OrderController::class, 'index'])->name('admin.orders');
         $route->get('/order/{id}', [ProductController::class, 'index'])->name('admin.order');
+    });
+
+    Route::prefix('account')->group(function ($route) {
+        $route->get('/accounts', [UserController::class, 'users'])->name('admin.user.all');
+        $route->get('/customers', [UserController::class, 'customers'])->name('admin.user.customers');
+        $route->post('/remove/{id}', [UserController::class, 'delete'])->name('admin.user.delete');
     });
 });
 

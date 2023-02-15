@@ -84,7 +84,7 @@
        <div class="py-5 w-full mx-3 md:mx-auto md:max-w-7xl">
             <div class="px-5">
                 <div class="mb-2">
-                    <h1 class="text-3xl md:text-5xl font-bold text-gray-600">Checkout</h1>
+                    <h1 class="text-3xl md:text-5xl font-bold text-gray-600 flex items-center"><x-application-logo class="w-10 h-10 rounded mr-3"/> Checkout</h1>
                 </div>
             </div>
             <div class="w-full bg-white shadow border-t border-b border-gray-200 rounded-md px-5 py-10 text-gray-800">
@@ -147,10 +147,13 @@
     paymentForm.addEventListener("submit", function(event) {
         event.preventDefault();
 
+        const amount = {!! $setting->dollar_value * $order->amount !!};
+        console.log(amount);
+
           const handler = PaystackPop.setup({
             key: '{!! config('paystack.public_key') !!}', // Replace with your public key
             email: document.getElementById("email").value,
-            amount: parseFloat({!! $order->amount !!}) * 100,
+            amount: amount * 100,
             // ref: ''+Math.floor((Math.random() * 1000000000) + 1),
             // generates a pseudo-unique reference. Please replace with a reference you generated. Or remove the line entirely so our API will generate one for you
             // label: "Optional string that replaces customer email"
@@ -161,7 +164,7 @@
                     text: "Payment could not be processed. Window closed.",
                     showConfirmButton: false,
                     background: "#F50E3E",
-                    // color: "#fff",
+                    color: "#fff",
                     timer: 1500,
                     position: "top-end",
                     timerProgressBar: true,

@@ -1,8 +1,8 @@
 <div class="w-full md:max-w-sm max-w-xs p-3">
-    <div class="h-full min-h-fit bg-gray-200 shadow-lg rounded-md border border-gray-300">
+    <div class="h-full min-h-fit bg-gray-50 shadow-lg rounded-md border border-gray-300">
         <div class="p-3 bg-white rounded-t-md border-b border-gray-300 shadow">
             <a href="{{ route('home') }}" class="flex items-center underline">
-                <x-application-logo class="w-20 h-20" />
+                <img src="{{ asset('images/logo/logo.jpg') }}" alt="" class="block w-20 h-20">
                 <span class="text-gray-800 text-sm md:text-2xl font-bold">{{ config('app.name') }}</span>
             </a>
         </div>
@@ -37,6 +37,22 @@
                     <i class="fa-solid fa-cart-flatbed {{ request()->routeIs('admin.orders') ? 'text-indigo-300' : 'text-gray-900' }}""></i>
                     <span class="pl-3">
                         Orders
+                    </span>
+                </a>
+            </span>
+            <span>
+                <a href="{{ route('admin.user.all') }}" class="{{ request()->routeIs('admin.user.all') ? 'bg-indigo-800 shadow-inner text-white' : 'hover:bg-indigo-300' }} flex items-center px-6 py-3 transition">
+                    <i class="fa-solid fa-cart-flatbed {{ request()->routeIs('admin.user.all') ? 'text-indigo-300' : 'text-gray-900' }}""></i>
+                    <span class="pl-3">
+                        Accounts
+                    </span>
+                </a>
+            </span>
+            <span>
+                <a href="{{ route('admin.user.customers') }}" class="{{ request()->routeIs('admin.user.customers') ? 'bg-indigo-800 shadow-inner text-white' : 'hover:bg-indigo-300' }} flex items-center px-6 py-3 transition">
+                    <i class="fa-solid fa-cart-flatbed {{ request()->routeIs('admin.user.customers') ? 'text-indigo-300' : 'text-gray-900' }}""></i>
+                    <span class="pl-3">
+                        Customers
                     </span>
                 </a>
             </span>

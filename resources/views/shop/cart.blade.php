@@ -4,8 +4,8 @@
         <?php $total = 0 ?>
         <div class="w-full mx-3 md:mx-auto md:max-w-7xl font-poppins">
             <div class="mb-2">
-                    <h1 class="text-3xl md:text-5xl font-bold text-gray-600">My basket</h1>
-                </div>
+                <h1 class="text-3xl md:text-5xl font-bold text-gray-600 flex items-center"><x-application-logo class="w-10 h-10 rounded mr-3"/> My basket</h1>
+            </div>
 
             <div class="rounded bg-white shadow p-12 font-poppins mt-8 w-full">
                 <div class="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">

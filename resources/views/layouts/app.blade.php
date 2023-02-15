@@ -18,7 +18,7 @@
 		<div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex">
 			@include('partials.admin.sidebar')
 			<div class="w-full mx-auto p-3">
-                <div class="h-full min-h-fit bg-gray-200 shadow-lg rounded-md">
+                <div class="h-full min-h-fit bg-gray-50 shadow-lg rounded-md">
                     @include('partials.admin.header')
 
                     <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">

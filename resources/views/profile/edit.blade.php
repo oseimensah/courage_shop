@@ -17,7 +17,7 @@
 
         <div class="relative py-10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold text-white">Profile</h1>
+                <h1 class="text-3xl font-bold text-white flex items-center"> <x-application-logo class="w-10 h-10 rounded mr-3"/>Profile</h1>
             </div>
         </div>
     </div>
@@ -55,6 +55,14 @@
                                     @include('profile.partials.update-password-form')
                                 </div>
                             </div>
+
+                            @if(auth()->user()->hasRole('admin'))
+                            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
+                                <div class="max-w-xl">
+                                    @include('profile.partials.update-currency-form')
+                                </div>
+                            </div>
+                            @endif
 
                             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
                                 <div class="max-w-xl">

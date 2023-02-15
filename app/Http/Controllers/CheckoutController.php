@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Traits\HelperTrait;
 use App\Models\Order;
+use App\Models\Setting;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
@@ -44,6 +45,7 @@ class CheckoutController extends Controller
         if ($request->code != null) {
             $order = Order::firstWhere('code', $request->code);
         }
-        return view('shop.checkout', compact('order'));
+        $setting = Setting::firstWhere('id', 1);
+        return view('shop.checkout', compact('order', 'setting'));
     }
 }

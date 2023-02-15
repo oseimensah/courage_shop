@@ -125,6 +125,6 @@ class Product extends Model implements HasMedia
 
     public function getPriceWithCurrencyAttribute()
     {
-        return "GHS " . $this->price;
+        return "$ " . $this->price;
     }
 }

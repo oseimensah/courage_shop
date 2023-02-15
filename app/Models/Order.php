@@ -40,7 +40,7 @@ class Order extends Model
 
     public function getAmountWithCurrencyAttribute()
     {
-        return "GHS " . $this->amount;
+        return "$ " . $this->amount;
     }
 
     public function payments()

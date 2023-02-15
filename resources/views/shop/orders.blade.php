@@ -17,7 +17,7 @@
 
         <div class="relative py-10">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold text-white">Orders</h1>
+                <h1 class="text-3xl font-bold text-white flex items-center"><x-application-logo class="w-10 h-10 rounded mr-3"/> Orders</h1>
             </div>
         </div>
     </div>
