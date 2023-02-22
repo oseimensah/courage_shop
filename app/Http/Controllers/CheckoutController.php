@@ -36,7 +36,9 @@ class CheckoutController extends Controller
         }
         $order->refresh();
 
-        return view('shop.checkout', compact('order'));
+        $setting = Setting::firstWhere('id', 1);
+
+        return view('shop.checkout', compact('order', 'setting'));
     }
 
     public function pay(Request $request)

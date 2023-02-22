@@ -18,7 +18,7 @@
                             <div class="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                                 <div class="mt-5 sm:mt-0">
                                     <h2 class="text-lg font-bold text-gray-900">{{ $product['name'] }}</h2>
-                                    <p class="mt-1 text-xs text-gray-700">GHC {{ $product['price'] }}</p>
+                                    <p class="mt-1 text-xs text-gray-700">$ {{ $product['price'] }}</p>
                                 </div>
                                 <div class="mt-4 flex justify-between im sm:space-y-6 sm:mt-0 sm:block sm:space-x-6">
                                     <div class="flex items-center border-gray-100">
@@ -27,7 +27,7 @@
                                         <span id="add-quantity" onclick="updateCart({{ $id }}, 'add')" class="cursor-pointer rounded-r bg-gray-100 py-1 px-3 duration-100 hover:bg-blue-500 hover:text-blue-50 hover:shadow-inner add-to-cart"> + </span>
                                     </div>
                                     <div class="flex items-center space-x-4">
-                                        <p class="text-sm">GHC {{ $product['price'] * $product['quantity'] }}</p>
+                                        <p class="text-sm">$ {{ $product['price'] * $product['quantity'] }}</p>
                                         <span id="remove-cart" onclick="removeCart({{ $id }})" >
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="h-5 w-5 cursor-pointer duration-150 hover:text-red-500">
                                                 <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -55,7 +55,7 @@
                         <div class="flex justify-between">
                             <p class="text-lg font-bold">Total</p>
                             <div class="">
-                                <p class="mb-1 text-lg font-bold">GHC {{ $total }}</p>
+                                <p class="mb-1 text-lg font-bold">$ {{ $total }}</p>
                             </div>
                         </div>
                         <div class="w-full mt-8">
