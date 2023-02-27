@@ -23,6 +23,12 @@ class Home extends Component
         $this->featuredProducts = Product::where('featured', '1')->latest()->get();
         $this->products = Product::where('featured', '0')->latest()->get();
         $this->categories = Category::latest()->get();
+
+        if (session('cart')) {
+            $this->cart = session('cart');
+            $this->cart_value = count(session('cart'));
+            // dd($this->cart_value);
+        }
     }
 
     public function render()

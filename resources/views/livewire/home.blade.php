@@ -1,4 +1,4 @@
-<div>
+<div x-data="{ showProduct: @entangle('showProduct') }">
 
     <div class="relative bg-gray-900">
         <div aria-hidden="true" class="absolute inset-0 overflow-hidden">
@@ -24,8 +24,8 @@
                         <img src="{{ $product->thumb_image_url }}" alt="product image" class="w-full h-full object-center object-cover" />
                     </div>
                     <div class="w-full h-full overflow-hidden space-y-3 mt-3">
-                        <h3 class="text-sm font-medium text-gray-900">
-                           <a href="">{{ $product->name }}</a>
+                        <h3 wire:click.prevent="viewProduct({{ $product }})" class="text-sm font-medium text-gray-900">
+                           <span class="cursor-pointer">{{ $product->name }}</span>
                         </h3>
                         <div class="flex justify-between">
                             <p class="mt-4 text-base font-medium text-gray-900">{{ $product->price_with_currency }}</p>
@@ -87,6 +87,63 @@
             </div>
         </div>
 
+    </div>
+
+    <div x-show="showProduct" class="relative z-10" role="dialog" aria-modal="true">
+        <div x-transition:enter="transition ease-out duration-300"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-200"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 hidden bg-gray-500 bg-opacity-75 transition-opacity md:block"></div>
+
+        <div class="fixed inset-0 z-10 overflow-y-auto">
+            <div class="flex min-h-full items-stretch justify-center text-center md:items-center md:px-2 lg:px-4">
+                <div x-transition:enter="transition ease-out duration-300"
+                    x-transition:enter-start="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+                    x-transition:enter-end="opacity-100 translate-y-0 md:scale-100"
+                    x-transition:leave="transition ease-in duration-200"
+                    x-transition:leave-start="opacity-100 translate-y-0 md:scale-100"
+                    x-transition:leave-end="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
+                    class="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
+
+                    <div class="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
+                        <button type="button" wire:click.prevent="closeProduct()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8">
+                            <span class="sr-only">Close</span>
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+
+                        <div class="grid w-full grid-cols-1 items-start gap-y-8 gap-x-6 sm:grid-cols-12 lg:gap-x-8">
+                            <div class="aspect-w-2 aspect-h-3 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
+                                <img src="{{ $product->thumb_image_url }}" alt="" class="object-cover object-center border border-gray-300 shadow-lg">
+                            </div>
+
+                            <div class="sm:col-span-8 lg:col-span-7">
+                                <div class="space-y-3">
+                                    <h4 class="text-xs md:text-sm text-gray-500">{{ $product->category->name }}</h4>
+                                    <h2 class="text-2xl font-bold text-gray-900 sm:pr-12">{{ $product->name }}</h2>
+                                </div>
+
+                                <section aria-labelledby="information-heading" class="mt-2">
+                                    <h3 id="information-heading" class="sr-only">{{ $product->description }}</h3>
+
+                                    <p class="text-2xl text-gray-900">{{ $product->price_with_currency }}</p>
+
+                                    <div class="mt-10 mb-3">
+                                        <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 dark:bg-gray-200 hover:bg-orange-800 w-full text-center text-white px-4 py-3 uppercase tracking-widest rounded-md font-semibold inline-flex justify-center items-center transition-all duration-300 ease-in-out text-xs">
+                                            add to cart
+                                        </button>
+                                    </div>
+
+                                </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     @include('partials.user.footer')

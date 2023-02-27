@@ -24,6 +24,6 @@
     @endif
 
     <div class="w-full h-fit">
-        @livewire('home',)
+        @livewire('home')
     </div>
 </x-shop-layout>
