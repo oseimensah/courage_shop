@@ -71,14 +71,14 @@
                         <img src="{{ $product->thumb_image_url }}" alt="product image" class="w-full h-full object-center object-cover" />
                     </div>
                     <div class="w-full h-full overflow-hidden space-y-3 mt-3">
-                        <h3 class="text-sm font-medium text-gray-900">
-                           <a href="">{{ $product->name }}</a>
+                         <h3 wire:click.prevent="viewProduct({{ $product }})" class="text-sm font-medium text-gray-900">
+                           <span class="cursor-pointer">{{ $product->name }}</span>
                         </h3>
                         <div class="flex justify-between">
                             <p class="mt-4 text-base font-medium text-gray-900">{{ $product->getPriceWithCurrencyAttribute() }}</p>
-                            <a href="{{ route('cart.add', $product->id) }}" class="bg-gray-800 dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
+                            <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
                                 add to cart
-                            </a>
+                            </button>
                         </div>
 
                     </div>
