@@ -15,7 +15,7 @@ class RateSeeder extends Seeder
      */
     public function run()
     {
-        $admin = Setting::create([
+        Setting::create([
             'dollar_value' => 12.5,
         ]);
     }
