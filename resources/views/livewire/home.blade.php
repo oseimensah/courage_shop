@@ -128,9 +128,12 @@
                                 </div>
 
                                 <section aria-labelledby="information-heading" class="mt-2">
-                                    <h3 id="information-heading" class="sr-only">{{ $product->description }}</h3>
 
                                     <p class="text-2xl text-gray-900">{{ $product->price_with_currency }}</p>
+
+                                    <p class="text-sm text-gray-700">
+                                        {{ $product->description }}
+                                    </p>
 
                                     <div class="mt-10 mb-3">
                                         <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 dark:bg-gray-200 hover:bg-orange-800 w-full text-center text-white px-4 py-3 uppercase tracking-widest rounded-md font-semibold inline-flex justify-center items-center transition-all duration-300 ease-in-out text-xs">
