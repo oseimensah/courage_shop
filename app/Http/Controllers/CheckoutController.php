@@ -16,6 +16,9 @@ class CheckoutController extends Controller
     {
         $total = 0;
         $cart = session()->get('cart');
+        if ($cart == null) {
+            return route('index');
+        }
         foreach ($cart as $id => $product) {
             $total += $product['price'] * $product['quantity'];
         }

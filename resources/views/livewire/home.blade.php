@@ -89,7 +89,7 @@
 
     </div>
 
-    <div x-show="showProduct" class="relative z-10" role="dialog" aria-modal="true">
+    <div x-show="showProduct" style="display:none" class="relative z-10" role="dialog" aria-modal="true">
         <div x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"

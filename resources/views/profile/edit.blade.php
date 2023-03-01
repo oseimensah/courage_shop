@@ -26,22 +26,7 @@
         <div class="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8">
             <div class="bg-white rounded-lg shadow overflow-hidden">
                 <div class="divide-y divide-gray-200 lg:grid lg:grid-cols-12 lg:divide-y-0 lg:divide-x">
-                    <aside class="py-6 lg:col-span-3">
-                        <nav class="space-y-1">
-                            {{-- <a :class=" 'bg-teal-50 border-teal-500 text-teal-700 hover:bg-teal-50 hover:text-teal-700' : 'border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900', 'group border-l-4 px-3 py-2 flex items-center text-sm font-medium']" :aria-current="item.current ? 'page' : undefined"> --}}
-                            <a href="{{ route('profile.edit') }}" class="border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900', 'group border-l-4 px-3 py-2 flex items-center text-sm font-medium" >
-                                <span class="truncate">
-                                    Profile
-                                </span>
-                            </a>
-                            <a href="{{ route('profile.orders') }}" class="border-transparent text-gray-900 hover:bg-gray-50 hover:text-gray-900', 'group border-l-4 px-3 py-2 flex items-center text-sm font-medium" >
-                                <span class="truncate">
-                                    Orders
-                                </span>
-                            </a>
-                        </nav>
-                    </aside>
-
+                    @include('partials.user.profile_aside')
                     <div class="py-6 lg:col-span-9">
                         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
                             <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
