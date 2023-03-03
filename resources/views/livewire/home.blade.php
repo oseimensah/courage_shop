@@ -16,7 +16,7 @@
 
     <div class="bg-white p-0">
         <div class="py-12 font-poppins max-w-7xl mx-auto">
-            <h2 class="font-bold py-8">Featured Products</h2>
+            <h2 class="font-bold py-8 pl-3 md:pl-0">Featured Products</h2>
             <div class="-mx-px border-l border-gray-200 grid grid-cols-2 sm:mx-0 md:grid-cols-3 lg:grid-cols-4">
                 @forelse ( $featuredProducts as $product )
                 <div class="group p-4 border-r border-b border-gray-200 sm:p-6 hover:shadow-xl transition-all duration-300 ease-in-out">
@@ -24,12 +24,12 @@
                         <img src="{{ $product->thumb_image_url }}" alt="product image" class="w-full h-full object-center object-cover" />
                     </div>
                     <div class="w-full h-full overflow-hidden space-y-3 mt-3">
-                        <h3 wire:click.prevent="viewProduct({{ $product }})" class="text-sm font-medium text-gray-900">
+                        <h3 wire:click.prevent="viewProduct({{ $product }})" class="text-sm text-center sm:text-start font-medium text-gray-900">
                            <span class="cursor-pointer">{{ $product->name }}</span>
                         </h3>
-                        <div class="flex justify-between">
-                            <p class="mt-4 text-base font-medium text-gray-900">{{ $product->price_with_currency }}</p>
-                            <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
+                        <div class="sm:flex sm:justify-between space-y-3 sm:space-y-0">
+                            <p class="mt-4 text-center sm:text-start text-base font-medium text-gray-900">{{ $product->price_with_currency }}</p>
+                            <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 w-full sm:w-auto dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
                                 add to cart
                             </button>
                         </div>
@@ -71,12 +71,12 @@
                         <img src="{{ $product->thumb_image_url }}" alt="product image" class="w-full h-full object-center object-cover" />
                     </div>
                     <div class="w-full h-full overflow-hidden space-y-3 mt-3">
-                         <h3 wire:click.prevent="viewProduct({{ $product }})" class="text-sm font-medium text-gray-900">
+                         <h3 wire:click.prevent="viewProduct({{ $product }})" class="text-sm text-center sm:text-start font-medium text-gray-900">
                            <span class="cursor-pointer">{{ $product->name }}</span>
                         </h3>
-                        <div class="flex justify-between">
-                            <p class="mt-4 text-base font-medium text-gray-900">{{ $product->getPriceWithCurrencyAttribute() }}</p>
-                            <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
+                        <div class="sm:flex sm:justify-between space-y-3 sm:space-y-0">
+                            <p class="mt-4 text-center sm:text-start text-base font-medium text-gray-900">{{ $product->price_with_currency }}</p>
+                            <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 w-full sm:w-auto dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
                                 add to cart
                             </button>
                         </div>
