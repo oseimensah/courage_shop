@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\Product;
 use Livewire\Component;
 use App\Models\Category;
+use Illuminate\Support\Facades\Log;
 
 class Home extends Component
 {
@@ -15,7 +16,7 @@ class Home extends Component
     public $cart_value = 0;
     public $showCart = false;
     public $showProduct = false;
-    public $product;
+    public Product $selectedProduct;
     public $total = 0;
 
     public function mount()
@@ -37,16 +38,19 @@ class Home extends Component
     }
 
     // methods
-    public function viewProduct($product)
+    public function viewProduct($id)
     {
         $this->showProduct = true;
-        $this->product = $product;
+        $this->selectedProduct = Product::firstWhere('id', $id);
+        // dd($this->selectedProduct);
     }
 
     public function closeProduct()
     {
+        // Log::critical($this->selectedProduct);
         $this->showProduct = false;
-        $this->product = null;
+        // $this->selectedProduct = null;
+        // Log::critical($this->selectedProduct);
     }
 
     public function addToCart($product)

@@ -24,14 +24,19 @@
                         <img src="{{ $product->thumb_image_url }}" alt="product image" class="w-full h-full object-center object-cover" />
                     </div>
                     <div class="w-full h-full overflow-hidden space-y-3 mt-3">
-                        <h3 wire:click.prevent="viewProduct({{ $product }})" class="text-sm text-center sm:text-start font-medium text-gray-900">
-                           <span class="cursor-pointer">{{ $product->name }}</span>
+                        <h3 class="text-sm text-center sm:text-start font-medium text-gray-900 md:flex md:justify-between">
+                           <span>{{ $product->name }}</span>
+                           <span wire:click.prevent="viewProduct({{ $product }})" class="rounded bg-green-800 hidden md:block p-2 text-xs text-white hover:shadow cursor-pointer">view</span>
                         </h3>
                         <div class="sm:flex sm:justify-between space-y-3 sm:space-y-0">
                             <p class="mt-4 text-center sm:text-start text-base font-medium text-gray-900">{{ $product->price_with_currency }}</p>
-                            <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 w-full sm:w-auto dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
-                                add to cart
-                            </button>
+                            <div class="flex md:pt-3 md:block justify-betweeen md:justify-start space-x-2 md:space-x-0">
+                                <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 w-full flex justify-center items-center text-center sm:w-auto dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
+                                    <span class="hidden md:block">add to cart</span>
+                                    <span class="md:hidden block">add</span>
+                                </button>
+                           <span wire:click.prevent="viewProduct({{ $product->id }})" class="rounded bg-green-800 block md:hidden p-2 text-xs text-white hover:shadow cursor-pointer">view</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -71,14 +76,19 @@
                         <img src="{{ $product->thumb_image_url }}" alt="product image" class="w-full h-full object-center object-cover" />
                     </div>
                     <div class="w-full h-full overflow-hidden space-y-3 mt-3">
-                         <h3 wire:click.prevent="viewProduct({{ $product }})" class="text-sm text-center sm:text-start font-medium text-gray-900">
-                           <span class="cursor-pointer">{{ $product->name }}</span>
+                        <h3 class="text-sm text-center sm:text-start font-medium text-gray-900 md:flex md:justify-between">
+                           <span>{{ $product->name }}</span>
+                           <span wire:click.prevent="viewProduct({{ $product->id }})" class="rounded bg-green-800 hidden md:block p-2 text-xs text-white hover:shadow cursor-pointer">view</span>
                         </h3>
                         <div class="sm:flex sm:justify-between space-y-3 sm:space-y-0">
                             <p class="mt-4 text-center sm:text-start text-base font-medium text-gray-900">{{ $product->price_with_currency }}</p>
-                            <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 w-full sm:w-auto dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
-                                add to cart
-                            </button>
+                            <div class="flex md:pt-3 md:block justify-betweeen md:justify-start space-x-2 md:space-x-0">
+                                <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 w-full flex justify-center items-center text-center sm:w-auto dark:bg-gray-200 hover:bg-orange-800 text-white px-4 py-2 uppercase tracking-widest rounded-md font-semibold inline-flex items-center transition-all duration-300 ease-in-out text-xs">
+                                    <span class="hidden md:block">add to cart</span>
+                                    <span class="md:hidden block">add</span>
+                                </button>
+                                <span wire:click.prevent="viewProduct({{ $product }})" class="rounded bg-green-800 block md:hidden p-2 text-xs text-white hover:shadow cursor-pointer">view</span>
+                            </div>
                         </div>
 
                     </div>
@@ -89,7 +99,7 @@
 
     </div>
 
-    <div x-show="showProduct" style="display:none" class="relative z-10" role="dialog" aria-modal="true">
+    <div x-show="showProduct" style="display:none" class="relative z-10 p-3 md:p-0" role="dialog" aria-modal="true">
         <div x-transition:enter="transition ease-out duration-300"
         x-transition:enter-start="opacity-0"
         x-transition:enter-end="opacity-100"
@@ -108,41 +118,46 @@
                     x-transition:leave-end="opacity-0 translate-y-4 md:translate-y-0 md:scale-95"
                     class="flex w-full transform text-left text-base transition md:my-8 md:max-w-2xl md:px-4 lg:max-w-4xl">
 
+
                     <div class="relative flex w-full items-center overflow-hidden bg-white px-4 pt-14 pb-8 shadow-2xl sm:px-6 sm:pt-8 md:p-6 lg:p-8">
-                        <button type="button" wire:click.prevent="closeProduct()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8">
+                        <button type="button" wire:click="closeProduct()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-500 sm:top-8 sm:right-6 md:top-6 md:right-6 lg:top-8 lg:right-8">
                             <span class="sr-only">Close</span>
                             <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                             </svg>
                         </button>
 
+                        @if($selectedProduct != null)
                         <div class="grid w-full grid-cols-1 items-start gap-y-8 gap-x-6 sm:grid-cols-12 lg:gap-x-8">
                             <div class="aspect-w-2 aspect-h-3 overflow-hidden rounded-lg bg-gray-100 sm:col-span-4 lg:col-span-5">
-                                <img src="{{ $product->thumb_image_url }}" alt="" class="object-cover object-center border border-gray-300 shadow-lg">
+                                <img src="{{ $selectedProduct->thumb_image_url }}" alt="" class="object-cover object-center border border-gray-300 shadow-lg">
                             </div>
 
                             <div class="sm:col-span-8 lg:col-span-7">
                                 <div class="space-y-3">
-                                    <h4 class="text-xs md:text-sm text-gray-500">{{ $product->category->name }}</h4>
-                                    <h2 class="text-2xl font-bold text-gray-900 sm:pr-12">{{ $product->name }}</h2>
+                                    <h4 class="text-xs md:text-sm text-gray-500">{{ $selectedProduct->category->name }}</h4>
+                                    <h2 class="text-2xl font-bold text-gray-900 sm:pr-12">{{ $selectedProduct->name }}</h2>
                                 </div>
 
                                 <section aria-labelledby="information-heading" class="mt-2">
 
-                                    <p class="text-2xl text-gray-900">{{ $product->price_with_currency }}</p>
+                                    <p class="text-2xl text-gray-900">{{ $selectedProduct->price_with_currency }}</p>
 
                                     <p class="text-sm text-gray-700">
-                                        {{ $product->description }}
+                                        {{ $selectedProduct->description }}
                                     </p>
 
                                     <div class="mt-10 mb-3">
-                                        <button type="button" wire:click.prevent="addToCart({{ $product }})" class="bg-gray-800 dark:bg-gray-200 hover:bg-orange-800 w-full text-center text-white px-4 py-3 uppercase tracking-widest rounded-md font-semibold inline-flex justify-center items-center transition-all duration-300 ease-in-out text-xs">
+                                        <button type="button" wire:click.prevent="addToCart({{ $selectedProduct }})" class="bg-gray-800 dark:bg-gray-200 hover:bg-orange-800 w-full text-center text-white px-4 py-3 uppercase tracking-widest rounded-md font-semibold inline-flex justify-center items-center transition-all duration-300 ease-in-out text-xs">
                                             add to cart
                                         </button>
                                     </div>
 
                                 </section>
-                        </div>
+                            </div>
+
+                        @endif
+
                     </div>
                 </div>
             </div>
